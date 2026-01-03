@@ -1,0 +1,25 @@
+# ASP.NET Core config
+**/appsettings.json
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/appsettings.Local.json
+
+# Build output
+**/bin/
+**/obj/
+
+# User secrets
+**/secrets.json
+
+# IDE
+.vs/
+.idea/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

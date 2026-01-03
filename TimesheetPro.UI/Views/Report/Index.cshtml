@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ProjectReportViewModel>
+
+@{
+    ViewData["Title"] = "Project Reports";
+}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Project Reports</h2>
+
+        <a asp-controller="Report" asp-action="ExportToExcel" class="btn btn-primary">
+            Export to excel
+        </a>
+    </div>
+
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.ClientName)</th>
+                <th>@Html.DisplayNameFor(m => m.ProjectName)</th>
+                <th>@Html.DisplayNameFor(m => m.BudgetHours)</th>
+                <th>@Html.DisplayNameFor(m => m.ApprovedHours)</th>
+                <th>@Html.DisplayNameFor(m => m.RemainingHours)</th>
+                <th>@Html.DisplayNameFor(m => m.IsOverBudget)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var rowClass = item.IsOverBudget == true ? "table-danger" : "";
+
+                <tr class="@rowClass">
+                    <td>@item.ClientName</td>
+                    <td>@item.ProjectName</td>
+                    <td>@item.BudgetHours</td>
+                    <td>@item.ApprovedHours</td>
+                    <td>@item.RemainingHours</td>
+                    <td>
+                        @if (item.IsOverBudget)
+                        {
+                            <span class="badge bg-danger">Over budget</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-success">Within budget</span>
+                        }
+                    </td>
+                </tr>                
+            }
+
+        </tbody>
+    </table>
+
+    @if (!Model.Any())
+    {
+        <p class="text-secondary">No projects found.</p>
+    }
+</div>
